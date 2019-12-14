@@ -4,11 +4,11 @@
       <router-link to="/">
         Home
       </router-link> |
-      <router-link to="/about">
-        About
+      <router-link to="/grid">
+        Grid
       </router-link> |
-      <router-link to="/about2">
-        About2
+      <router-link to="/test">
+        Test
       </router-link>
     </div>
     <router-view />
@@ -22,6 +22,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 
 #nav {
