@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <h1>This is an test page </h1>
@@ -15,10 +16,19 @@
       :class="[isBlue ? 'blue' : 'red']"
       @click="changeColor"
     />
+
+    <div>
+      <h1>{{ getGlobalCounter }}</h1>
+    </div>
+    <button @click="incrementActions">
+      Add 1
+    </button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -28,10 +38,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      // from store/index.js
+      'incrementActions'
+    ]),
     greet: function (event) {
-      // `this` 在方法里指向当前 Vue 实例
       alert('Hello ' + this.name + ', you have click ' + this.counter + ' times!')
-      // `event` 是原生 DOM 事件
       if (event) {
         console.log(event.target.tagName)
       }
@@ -39,7 +51,10 @@ export default {
     changeColor () {
       this.isBlue = !this.isBlue
     }
-  }
+  },
+  computed: mapGetters([
+    'getGlobalCounter'
+  ])
 }
 </script>
 

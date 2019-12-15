@@ -1,70 +1,68 @@
 <template>
   <div style="height: 100%;">
-    <button @click="refresh">
+    <button @click="startAddCounter">
       开始
     </button>
-    <button @click="stop">
+    <button @click="stopCounter">
       停止
     </button>
     <div class="outside">
       <div class="grid gray">
-        <span class="font-grid">{{ numberObj.one }}</span>
+        <span class="font-grid">{{ getGlobalCounter }}</span>
       </div>
 
       <div class="grid blue">
-        <span class="font-grid">{{ numberObj.two }}</span>
+        <span class="font-grid">{{ getGlobalCounter }}</span>
       </div>
 
       <div class="grid red">
-        <span class="font-grid">{{ numberObj.three }}</span>
+        <span class="font-grid">{{ getGlobalCounter }}</span>
       </div>
 
       <div class="grid yellow">
-        <span class="font-grid">{{ numberObj.four }}</span>
+        <span class="font-grid">{{ getGlobalCounter }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
-      numberObj: {
-        one: 0,
-        two: 0,
-        three: 0,
-        four: 0
-      },
       timer: null
     }
   },
   mounted () {
-    this.refresh()
+    // this.startAddCounter()
+    console.log('mounted')
   },
   methods: {
-    refresh () {
+    ...mapActions([
+      // from store/index.js
+      'incrementActions'
+    ]),
+    startAddCounter () {
       if (this.timer) {
-        this.stop()
+        this.stopCounter()
       }
 
       this.timer = setInterval(() => {
-        this.numberObj.one++
-        this.numberObj.two += 2
-        this.numberObj.three += 3
-        this.numberObj.four += 4
+        this.incrementActions()
       }, 1000)
     },
-    stop () {
+    stopCounter () {
       clearTimeout(this.timer)
       this.numberObj = {
-        one: 0,
-        two: 0,
-        three: 0,
-        four: 0
+        one: 0
       }
     }
-  }
+  },
+  computed: mapGetters([
+    'getGlobalCounter'
+  ])
 }
 </script>
 
