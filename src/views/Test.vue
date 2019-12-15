@@ -8,9 +8,16 @@
     </button>
     <p>The button above has been clicked {{ counter }} times.</p>
 
-    <button @click="greet">
-      Greet
-    </button>
+    <div>
+      <p>
+        If Element is successfully added to this project, you'll see an
+        <code v-text="'<el-button>'" />
+        below
+      </p>
+      <el-button @click="greet">
+        el-button
+      </el-button>
+    </div>
 
     <div
       :class="[isBlue ? 'blue' : 'red']"
@@ -33,7 +40,7 @@ export default {
   data () {
     return {
       counter: 0,
-      name: 'feifei',
+      name: 'FiFi',
       isBlue: false
     }
   },
